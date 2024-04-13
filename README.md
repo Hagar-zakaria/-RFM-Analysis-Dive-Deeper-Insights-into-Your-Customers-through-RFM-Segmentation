@@ -46,3 +46,89 @@ All in all, RFM Analysis is a brilliant way to personalize your marketing effort
 6. Conclusion:
 - RFM Analysis bridges the gap between businesses and customers, facilitating meaningful relationships.
 - It's not just about numbers but understanding people, essential for becoming a beloved brand.
+
+
+# Getting Started with RFM Analysis: Step-by-Step Guide
+When it comes to data analytics tasks, it all starts from the Plan: you define the Business Goals, the Questions you supposed to be asking and the Metrics you need to measure. 
+
+In our case - we already know all that information, we want to improve the revenue from existing list by segmenting the uses, so we can create more targeted campaigns. Out questions as well as the metrics are related to the whole R-F-M framework. 
+
+For each of these metrics, we assign customers to one of three groups, which are assigned a number from 1 to 3.
+
+**"Recency"**:
+
+1 – long-standing customers.
+2 – relatively recent customers.
+3 – recent customers.
+
+**"Frequency"**:
+
+1 – purchases rarely (single orders).
+2 – purchases infrequently.
+3 – purchases often.
+
+**"Monetary value"**:
+
+1 – low value of purchases.
+2 – average value of purchases.
+3 – high value of purchases.
+
+Customers are assigned RFM values by concatenating their numbers for Recency, Frequency, and Monetary value. For example, customer 111 made one order with a low monetary value a long time ago. Customer 333, on the other hand, often makes large-value orders and made a purchase recently. Customers with 3’s in every category are your best customers.
+
+
+# Step 1: Collect the necessary data
+You will need data on customer transactions (orders), including the date of the transaction, the customer ID, and the monetary value of the transaction (order amount). This data can typically be obtained from your CRM, ERP or database.
+
+# Step 2: Prepare data for analysis
+With purchasing behavior data collected, the next move is to prepare our data for RFM analysis, we need to make our raw data analysis ready.
+
+Let us assume you have a table of customer transactions.
+
+- In Column A you have the Customer Identification - like userid,
+- Column B  - Date of Transaction,
+- Column C - Order Value
+
+  ![image](https://github.com/Hagar-zakaria/RFM-Analysis-Dive-Deeper-Insights-into-Your-Customers-through-RFM-Segmentation/assets/93611934/b92de677-073c-4c88-8ca5-484d715d9cd7)
+
+**RFM Data preparation in Google Sheets & Excel**
+To calculate the recency in Google Sheets or Microsoft Excel, first we need to find the lates transaction date for each of the customers. Let's create a new column and call it DaysSinceTransaction.
+
+The formula would be =TODAY()-B2. Here, 'TODAY()' returns the current date, and 'B2' refers to the cell containing the date of the last transaction for a particular transaction. The result will be the number of days since the transaction.
+
+![image](https://github.com/Hagar-zakaria/RFM-Analysis-Dive-Deeper-Insights-into-Your-Customers-through-RFM-Segmentation/assets/93611934/753584d2-640b-4b1f-a225-e5addfcabf9a)
+
+We’ve successfully gathered all the transactions and their corresponding customer IDs. Plus, we've also determined the **number of days that have passed since each transaction.** 
+
+Given that our database contains a list of multiple transactions for individual customers, it's important to select only the most recent transaction date for each customer when calculating Recency.
+
+So how do you pinpoint the latest transaction date after establishing the number of days passed since each transaction? 
+
+Let's select the **data range** , click **Insert** -> **Pivot Table**. 
+
+Add **Customer ID** as **Rows**.
+
+Add **DaysSinceTransaction** as a Value. And summarize by **MIN**.
+
+![image](https://github.com/Hagar-zakaria/RFM-Analysis-Dive-Deeper-Insights-into-Your-Customers-through-RFM-Segmentation/assets/93611934/7cb38526-234d-4828-9c2b-a0145d4ba841)
+
+This would help us achieve us a smaller dataset with a single, latest transaction date per customer.
+
+When the aforementioned steps are done correctly, Google Sheets will then generate a new pivot array. This dataset solely consists of rows showcasing each unique customer ID in tandem with their most recent transaction dates.
+
+Next, add the Customer ID summarized by COUNTA to Values now to save our time later. 
+
+Let's also calculate the total value of all orders for each customer. To do this, add Order Value as a Value to get the total amount spent per customer, and in the Summarize by column, indicate SUM.​
+
+That’s it for analysis preparation.
+
+Now we need to copy this pivot table data to a new sheet to calculate RFM values, and rename the columns to Recency, Frequency and Moneraty.
+
+![image](https://github.com/Hagar-zakaria/RFM-Analysis-Dive-Deeper-Insights-into-Your-Customers-through-RFM-Segmentation/assets/93611934/f890acef-1ca5-4263-8c6a-d5e6907bfd3a)
+
+**RFM Data preparation with SQL**
+
+In SQL, you'd typically utilize the **DATEDIFF** function to get the **DaysSinceTransaction**. 
+
+Assuming your table of customer transactions contains a column named **'DateOfTransaction'**, the SQL query would be:
+
+```SELECT DATEDIFF(day, DateOfTransaction, GETDATE()) as DaysSinceTransaction FROM CustomerTransactions;```
