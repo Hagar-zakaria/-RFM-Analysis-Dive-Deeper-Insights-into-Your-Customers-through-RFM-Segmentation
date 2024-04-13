@@ -140,9 +140,11 @@ You can utilize SQL to fine-tune your data. It allows you to pick the most recen
 Your SQL command may look like this: 
 
 
-```SELECT customer_id, MIN(DaysSinceTransaction)
+```
+SELECT customer_id, MIN(DaysSinceTransaction)
 FROM CustomerTransactions
-GROUP BY customer_id```
+GROUP BY customer_id
+```
 
 after running this command, you'll have a list with each customer's most recent transaction identificator, which aligns perfectly with the recency aspect of RFM Analysis. 
 
@@ -151,9 +153,11 @@ Once you've gathered the necessary data, you can pivot or group the 'customer_id
 Here's a substance to illustrate:
 
 
-```SELECT customer_id, SUM(order_value) AS total_order_value, COUNT(*) AS no_of_transactions
+```
+SELECT customer_id, SUM(order_value) AS total_order_value, COUNT(*) AS no_of_transactions
 FROM CustomerTransactions
-GROUP BY customer_id```
+GROUP BY customer_id
+```
 
 This SQL statement does two things. It first groups all orders that belong to each customer, represented by the 'customer_id'. Following that, it calculates the total order value and the number of orders for each customer.
 
@@ -164,11 +168,11 @@ By applying 'COUNT(*)', the query counts the number of rows for each customer, t
 # Step 3: Calculate recency
 The Recency score represents how recently a customer made a purchase, with a higher score indicating a more recent purchase.
 
-The first thing we need to do is calculate how long 33% and 66% of our customers have bought from us. This is easily done using the formula =PERCENTILE.INC ([range]; 0.33) and = PERCENTILE.INC ([range]; 0.66).
+The first thing we need to do is calculate how long **33%** and **66%** of our customers have bought from us. This is easily done using the formula =PERCENTILE.INC ([range]; 0.33) and = PERCENTILE.INC ([range]; 0.66).
 
-We now know that 33% of customers bought our products less than 11.28 days ago, and 66% bought less than 14.28 days ago.​
+We now know that **33%** of customers bought our products less than **11.28** days ago, and **66%** bought less than **14.28** days ago.​
 
 Accordingly we assign those customers who bought less than 11.28 days ago the highest value of 3.
-Those who placed an order from 11.28 to 14.28 days ago are assigned a value of 2.
-The rest, who bought more than 14.28 days ago, we assign a value of 1.
+Those who placed an order from **11.28** to **14.28** days ago are assigned a value of 2.
+The rest, who bought more than **14.28** days ago, we assign a value of 1.
 All this can be automatically calculated with the formula =IF(B2<11.28; 3; IF(B2 <14.28; 2, 1)).
