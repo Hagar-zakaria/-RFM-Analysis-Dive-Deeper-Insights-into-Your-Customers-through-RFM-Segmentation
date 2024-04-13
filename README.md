@@ -176,3 +176,54 @@ Accordingly we assign those customers who bought less than 11.28 days ago the hi
 Those who placed an order from **11.28** to **14.28** days ago are assigned a value of 2.
 The rest, who bought more than **14.28** days ago, we assign a value of 1.
 All this can be automatically calculated with the formula =IF(B2<11.28; 3; IF(B2 <14.28; 2, 1)).
+
+![image](https://github.com/Hagar-zakaria/RFM-Analysis-Dive-Deeper-Insights-into-Your-Customers-through-RFM-Segmentation/assets/93611934/a5cc57d6-9b1f-4340-a129-f55046e44219)
+
+# Step 4: Calculate frequency
+The Frequency score measures how often a customer makes purchases, with a higher score indicating more frequent purchases.
+
+Using the same principle, we calculate the values for F (Frequency): first, we calculate how many times **33% and 66%** of our customers made a purchase and, based on the results, assign values from 1 to 3.​
+
+![image](https://github.com/Hagar-zakaria/RFM-Analysis-Dive-Deeper-Insights-into-Your-Customers-through-RFM-Segmentation/assets/93611934/6b6cdd9d-4097-42da-a77d-23f1ebce6f0f)
+
+
+# Step 5: Calculate monetary value
+
+The Monetary score reflects the total value of a customer's purchases, with a higher score indicating higher spending.
+
+Using the same principle, we calculate the values for M (Monetary Value): first, we calculate how much have **33% and 66%** of our customers spent and, based on the results, assign values from 1 to 3.​
+
+![image](https://github.com/Hagar-zakaria/RFM-Analysis-Dive-Deeper-Insights-into-Your-Customers-through-RFM-Segmentation/assets/93611934/626eb1d9-6f80-4aa6-9835-5e0ee1b44886)
+
+# Step 6: Calculate RFM Score
+
+Once you have the R, F and M values, you need to calculate the RFM score for each customer. We concatenate all three values for each customer. We can do that using the formula **=E2*100+F2* 10+G2.​**
+
+![image](https://github.com/Hagar-zakaria/RFM-Analysis-Dive-Deeper-Insights-into-Your-Customers-through-RFM-Segmentation/assets/93611934/21416bee-73aa-4d32-ac3e-456b815e73af)
+
+That’s it. We’ve made all the necessary calculations for RFM analysis in Google Sheets (or Excel). 
+
+All you have to do now is to sort range by RFM Score and plan on how to engage with those groups or segments based on priorities. Look for patterns and trends within each segment to understand their behavior and preferences. Tailor your marketing strategies and offerings to better serve each segment.
+
+# How to use RFM analysis in marketing
+
+When all the calculations are ready and you’ve segmented your customers, it’s time to move on to the marketing part.
+
+By grouping customers by RFM values, you can immediately get a complete picture of what’s happening with your customer base. Let’s look at examples of some client groups.
+
+**Group 3R-3F-3M** – the most active, buy often
+
+These are your ideal customers. It’s possible to expand your engagement with them by launching a loyalty program, inviting them to special events, or asking them about how they would want the company to develop. It’s important to show these customers that they’re respected and welcome users.
+
+**Group 1R-1F-1M** – the least active, bought once / never, spent little
+
+Although these customers seem to be the least promising, you shouldn’t write them off completely: they showed interest in your products at least once. Most often, marketers prepare special provocative messages to divide these customers into “definitely disinterested in the product” and “promising.” Promising customers can be transferred to the next category.
+
+**1 in one of the categories**
+
+Some of your customers may have a value of 122 (lame Recency). This segment should be given a little time to decide about returning to you. Try to offer them products that are usually bought along with those that they purchased earlier in order to arouse a renewed interest in your company.
+
+**3 in one of the categories**
+
+These users are a promising segment for your research. They’re consistent enough for you to experiment and find a suitable way to raise their other indicators.
+
